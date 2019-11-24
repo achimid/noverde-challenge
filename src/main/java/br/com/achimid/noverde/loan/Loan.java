@@ -3,6 +3,7 @@ package br.com.achimid.noverde.loan;
 import br.com.achimid.noverde.core.util.DateUtils;
 import br.com.achimid.noverde.loan.types.LoanResultEnum;
 import br.com.achimid.noverde.loan.types.LoanStatusEnum;
+import br.com.achimid.noverde.loan.types.LoanTermsEnum;
 import br.com.achimid.noverde.loan.types.RefusedPolicyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,7 +40,8 @@ public class Loan {
     private BigDecimal amount;
 
     @NotNull
-    private Integer terms;
+    @Enumerated(value = EnumType.STRING)
+    private LoanTermsEnum terms;
 
     @NotNull
     private BigDecimal income;

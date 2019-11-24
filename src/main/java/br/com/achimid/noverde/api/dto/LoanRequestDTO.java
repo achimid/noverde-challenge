@@ -1,14 +1,12 @@
 package br.com.achimid.noverde.api.dto;
 
 import br.com.achimid.noverde.loan.Loan;
+import br.com.achimid.noverde.loan.types.LoanTermsEnum;
 import lombok.Data;
 import lombok.val;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -35,7 +33,9 @@ public class LoanRequestDTO {
     private BigDecimal amount;
 
     /** Quantidade de parcelas desejadas. Valores disponíveis: 6, 9 ou 12  */
-    private Integer terms;
+    @NotNull(message = "terms é um campo obrigatório")
+    @Pattern(regexp = "6|9|12", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Valores válidos para terms (6,9,12)")
+    private String terms;
 
     /** Renda mensal do cliente  */
     @NotNull(message = "income é um campo obrigatório")
@@ -50,8 +50,10 @@ public class LoanRequestDTO {
         loan.setBirthdate(this.birthdate);
         loan.setCpf(this.cpf);
         loan.setIncome(this.income);
-        loan.setTerms(this.terms);
+        loan.setTerms(LoanTermsEnum.valueOf("X" + terms));
 
         return loan;
     }
+
+
 }
