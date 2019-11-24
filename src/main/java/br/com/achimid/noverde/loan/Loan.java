@@ -49,7 +49,7 @@ public class Loan {
     @Enumerated(value = EnumType.STRING)
     private LoanStatusEnum status = LoanStatusEnum.PROCESSING;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private LoanProcess process;
 
 
