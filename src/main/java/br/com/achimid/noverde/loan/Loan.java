@@ -60,9 +60,13 @@ public class Loan {
     }
 
     public void refuse(RefusedPolicyEnum rfPolicy) {
+        this.status = LoanStatusEnum.COMPLETED;
+
         this.process = new LoanProcess();
         process.setRefusedPolicy(rfPolicy);
         process.setResult(LoanResultEnum.REFUSED);
+
+
     }
 
 }
