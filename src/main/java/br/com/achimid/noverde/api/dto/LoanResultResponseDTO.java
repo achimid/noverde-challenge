@@ -1,12 +1,11 @@
-package br.com.achimid.noverde.dto;
+package br.com.achimid.noverde.api.dto;
 
 import br.com.achimid.noverde.loan.Loan;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.val;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
 public class LoanResultResponseDTO {
@@ -31,13 +30,20 @@ public class LoanResultResponseDTO {
 
     public LoanResultResponseDTO(@NonNull Loan loan) {
         this.id = loan.getId().toString();
+        this.status = loan.getStatus().getValor();
 
         if (loan.isCompleted()) {
-            this.status = loan.getStatus().toString();
-            this.result = loan.getProcess().getResult();
-            this.refusedPolicy = loan.getProcess().getRefusedPolicy();
-            this.amount = loan.getProcess().getAmount();
-            this.terms = loan.getProcess().getTerms();
+            val process = loan.getProcess();
+
+
+            this.result = process.getResult().getValor();
+
+            if (process.isApproved()) {
+                this.amount = process.getAmount();
+                this.terms = process.getTerms();
+            } else {
+                this.refusedPolicy = process.getRefusedPolicy();
+            }
         }
     }
 

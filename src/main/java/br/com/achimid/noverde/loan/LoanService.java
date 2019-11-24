@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -16,8 +17,8 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
-    public Loan getLoan(@NonNull String id) {
-        return loanRepository.findById(UUID.fromString(id)).get();
+    public Optional<Loan> getLoan(@NonNull String id) {
+        return loanRepository.findById(UUID.fromString(id));
     }
 
 }

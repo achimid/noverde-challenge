@@ -3,12 +3,8 @@ package br.com.achimid.noverde.loan;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -19,12 +15,17 @@ public class LoanProcess {
     @GeneratedValue
     private Integer id;
 
-    private String result;
+    @Enumerated(value = EnumType.STRING)
+    private LoanResultEnum result;
 
     private String refusedPolicy;
 
     private BigDecimal amount;
 
     private Integer terms;
+
+    public boolean isApproved() {
+        return LoanResultEnum.APPROVED.equals(result);
+    }
 
 }

@@ -1,8 +1,9 @@
-package br.com.achimid.noverde.dto;
+package br.com.achimid.noverde.api.dto;
 
 import br.com.achimid.noverde.loan.Loan;
 import lombok.Data;
 import lombok.val;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -23,6 +24,7 @@ public class LoanRequestDTO {
     private String cpf;
 
     /** Data de nascimento do cliente  */
+    @DateTimeFormat(style = "yyyy-MM-dd")
     @NotNull(message = "birthdate é um campo obrigatório")
     private Date birthdate;
 

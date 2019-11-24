@@ -1,4 +1,4 @@
-package br.com.achimid.noverde.dto;
+package br.com.achimid.noverde.api.dto;
 
 import br.com.achimid.noverde.loan.Loan;
 import lombok.Data;
