@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface LoanRepository extends CrudRepository<Loan, UUID> {
 
-    List<Loan> findByStatusEquals(LoanStatusEnum status);
+    List<Loan> findTop100ByStatusEquals(LoanStatusEnum status);
 
 }

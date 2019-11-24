@@ -1,5 +1,6 @@
 package br.com.achimid.noverde.unit.core.policy.impl;
 
+import br.com.achimid.noverde.ApplicationConfig;
 import br.com.achimid.noverde.core.policy.impl.ScorePolicy;
 import br.com.achimid.noverde.loan.Loan;
 import br.com.achimid.noverde.loan.types.LoanResultEnum;
@@ -8,7 +9,10 @@ import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 public class ScorePolicyTest {
 

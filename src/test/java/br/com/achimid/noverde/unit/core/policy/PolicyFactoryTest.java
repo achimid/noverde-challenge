@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PolicyFactoryTest {
 
+    @Autowired
+    private PolicyFactory policyFactory;
+
     @Test
     public void testeFactoryInstance() {
-        val policies = PolicyFactory.policies;
+        val policies = policyFactory.getPolicies();
 
         Assertions.assertNotNull(policies);
         Assertions.assertEquals(policies.size(), 3);

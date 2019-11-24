@@ -68,7 +68,7 @@ public class CreditEngine {
      */
     private List<Loan> getPendingLoans() {
         log.info("Consultando Loans com o status PROCESSING");
-        return loanRepository.findByStatusEquals(LoanStatusEnum.PROCESSING);
+        return loanRepository.findTop100ByStatusEquals(LoanStatusEnum.PROCESSING);
     }
 
 }
