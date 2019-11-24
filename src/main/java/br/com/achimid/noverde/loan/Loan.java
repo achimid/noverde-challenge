@@ -1,13 +1,20 @@
 package br.com.achimid.noverde.loan;
 
+import br.com.achimid.noverde.core.util.DateUtils;
+import br.com.achimid.noverde.loan.types.LoanResultEnum;
 import br.com.achimid.noverde.loan.types.LoanStatusEnum;
+import br.com.achimid.noverde.loan.types.RefusedPolicyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.val;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -45,6 +52,17 @@ public class Loan {
 
     public boolean isCompleted() {
         return this.process != null;
+    }
+
+    public int getAge() {
+        val lcDate = DateUtils.getInstance().convertToLocalDateTime(this.birthdate);
+        return Period.between(lcDate.toLocalDate(), LocalDate.now()).getYears();
+    }
+
+    public void refuse(RefusedPolicyEnum rfPolicy) {
+        this.process = new LoanProcess();
+        process.setRefusedPolicy(rfPolicy);
+        process.setResult(LoanResultEnum.REFUSED);
     }
 
 }

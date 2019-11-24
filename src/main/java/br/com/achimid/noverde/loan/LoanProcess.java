@@ -1,6 +1,7 @@
 package br.com.achimid.noverde.loan;
 
 import br.com.achimid.noverde.loan.types.LoanResultEnum;
+import br.com.achimid.noverde.loan.types.RefusedPolicyEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +20,8 @@ public class LoanProcess {
     @Enumerated(value = EnumType.STRING)
     private LoanResultEnum result;
 
-    private String refusedPolicy;
+    @Enumerated(value = EnumType.STRING)
+    private RefusedPolicyEnum refusedPolicy;
 
     private BigDecimal amount;
 

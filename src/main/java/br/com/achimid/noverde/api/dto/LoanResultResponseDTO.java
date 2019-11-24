@@ -42,7 +42,7 @@ public class LoanResultResponseDTO {
                 this.amount = process.getAmount();
                 this.terms = process.getTerms();
             } else {
-                this.refusedPolicy = process.getRefusedPolicy();
+                this.refusedPolicy = process.getRefusedPolicy().getValor();
             }
         }
     }
