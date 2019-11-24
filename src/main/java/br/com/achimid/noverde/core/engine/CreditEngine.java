@@ -20,6 +20,10 @@ public class CreditEngine {
     @Autowired
     private LoanRepository loanRepository;
 
+    @Autowired
+    private PolicyFactory policyFactory;
+
+
     /**
      * Metodo de processamento das solicitações pendentes
      */
@@ -29,6 +33,9 @@ public class CreditEngine {
 
         val loans = getPendingLoans();
         loans.forEach(loan -> validatePolicies(loan));
+
+        log.info("Finalizando processamento");
+        log.info("Itens processados: {}", loans.size());
     }
 
     /**
@@ -36,7 +43,7 @@ public class CreditEngine {
      */
     private void validatePolicies(Loan loan) {
 
-        for (PolicyFacade policy: PolicyFactory.policies) {
+        for (PolicyFacade policy: policyFactory.getPolicies()) {
             policy.validatePolicy(loan);
 
             if (loan.isCompleted()) {
@@ -45,7 +52,10 @@ public class CreditEngine {
             }
         }
 
-        if (loan.isCompleted()) return;
+        if (loan.isRefused()) return;
+
+        loan.approve();
+        loanRepository.save(loan);
     }
 
     /**

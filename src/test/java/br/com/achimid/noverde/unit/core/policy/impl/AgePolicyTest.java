@@ -1,15 +1,13 @@
 package br.com.achimid.noverde.unit.core.policy.impl;
 
-import br.com.achimid.noverde.core.policy.PolicyFactory;
 import br.com.achimid.noverde.core.policy.impl.AgePolicy;
 import br.com.achimid.noverde.loan.Loan;
 import br.com.achimid.noverde.loan.types.LoanResultEnum;
 import br.com.achimid.noverde.loan.types.LoanStatusEnum;
 import lombok.val;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
@@ -17,7 +15,7 @@ public class AgePolicyTest {
 
     private AgePolicy agePolicy;
 
-    @Before
+    @BeforeAll
     public void before() {
         agePolicy = new AgePolicy();
         agePolicy.setAgeLimit(18);
@@ -33,9 +31,9 @@ public class AgePolicyTest {
 
         agePolicy.validatePolicy(loan);
 
-        Assert.assertTrue(loan.isCompleted());
-        Assert.assertEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
-        Assert.assertEquals(loan.getProcess().getResult(), LoanResultEnum.REFUSED);
+        Assertions.assertTrue(loan.isCompleted());
+        Assertions.assertEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
+        Assertions.assertEquals(loan.getProcess().getResult(), LoanResultEnum.REFUSED);
     }
 
     @Test
@@ -48,8 +46,8 @@ public class AgePolicyTest {
 
         agePolicy.validatePolicy(loan);
 
-        Assert.assertFalse(loan.isCompleted());
-        Assert.assertNotEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
+        Assertions.assertFalse(loan.isCompleted());
+        Assertions.assertNotEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
     }
 
     @Test
@@ -62,8 +60,8 @@ public class AgePolicyTest {
 
         agePolicy.validatePolicy(loan);
 
-        Assert.assertFalse(loan.isCompleted());
-        Assert.assertNotEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
+        Assertions.assertFalse(loan.isCompleted());
+        Assertions.assertNotEquals(loan.getStatus(), LoanStatusEnum.COMPLETED);
     }
 
 }

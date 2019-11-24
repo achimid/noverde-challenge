@@ -50,9 +50,22 @@ public class Loan {
     @OneToOne(cascade = CascadeType.PERSIST)
     private LoanProcess process;
 
+
+
+
     public boolean isCompleted() {
         return this.process != null;
     }
+
+    public boolean isRefused() {
+        return this.process != null && !this.process.isApproved();
+    }
+
+    public boolean isApproved() {
+        return this.process != null && this.process.isApproved();
+    }
+
+
 
     public int getAge() {
         val lcDate = DateUtils.getInstance().convertToLocalDateTime(this.birthdate);
@@ -65,8 +78,13 @@ public class Loan {
         this.process = new LoanProcess();
         process.setRefusedPolicy(rfPolicy);
         process.setResult(LoanResultEnum.REFUSED);
+    }
 
+    public void approve() {
+        this.status = LoanStatusEnum.COMPLETED;
 
+        this.process = new LoanProcess();
+        process.setResult(LoanResultEnum.APPROVED);
     }
 
 }
