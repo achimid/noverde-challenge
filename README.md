@@ -11,4 +11,16 @@ Entre na raiz do projeto e execute os comandos a seguir:
     ->  ./gradlew bootJar
     ->  java -jar build/libs/noverde-1.0.0.jar 
 
-#### considerações
+#### Considerações
+
+
+#### Sugestão de melhorias
+- Utilizar um banco de dados não relacional para ter uma malhor performace
+
+- Utilizar um serviço de fila (pub/sub ou RabitMq) ao invez de utilizar Jobs/Workers
+
+- Melhorar o sistema de cache utilizado
+
+- Implementar mais cenários de teste
+
+- Efetuar a separação entre API e Processamento em dois projetos para uma melhora de escalabilidade. 
