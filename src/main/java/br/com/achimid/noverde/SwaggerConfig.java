@@ -1,4 +1,4 @@
-package br.com.achimid.noverde.api.config;
+package br.com.achimid.noverde;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

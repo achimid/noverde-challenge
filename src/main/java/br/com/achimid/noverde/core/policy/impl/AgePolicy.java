@@ -5,11 +5,13 @@ import br.com.achimid.noverde.loan.Loan;
 import br.com.achimid.noverde.loan.LoanRepository;
 import br.com.achimid.noverde.loan.types.RefusedPolicyEnum;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.NotNull;
 
+@Slf4j
 public class AgePolicy implements PolicyFacade {
 
     @Autowired
@@ -21,6 +23,8 @@ public class AgePolicy implements PolicyFacade {
 
     @Override
     public void validatePolicy(@NotNull Loan loan) {
+        log.info("Validando politica de Idade");
+
         if (loan.getAge() >= ageLimit) return;
 
         loan.refuse(RefusedPolicyEnum.AGE);
