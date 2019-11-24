@@ -1,5 +1,6 @@
 package br.com.achimid.noverde.loan;
 
+import br.com.achimid.noverde.loan.types.LoanResultEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

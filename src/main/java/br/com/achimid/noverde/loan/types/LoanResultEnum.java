@@ -1,4 +1,4 @@
-package br.com.achimid.noverde.loan;
+package br.com.achimid.noverde.loan.types;
 
 public enum LoanResultEnum {
     APPROVED("approved"),

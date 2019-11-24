@@ -1,9 +1,10 @@
-package br.com.achimid.noverde.loan;
+package br.com.achimid.noverde.api.controller;
 
 import br.com.achimid.noverde.api.dto.LoanErrorResponseDTO;
 import br.com.achimid.noverde.api.dto.LoanRequestDTO;
 import br.com.achimid.noverde.api.dto.LoanResultResponseDTO;
 import br.com.achimid.noverde.api.dto.LoanSucessResponseDTO;
+import br.com.achimid.noverde.loan.LoanService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
