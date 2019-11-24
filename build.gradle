@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'br.com.achimid'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -46,3 +46,8 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+bootJar {
+	mainClassName = 'br.com.achimid.noverde.NoverdeApplication'
+}
+
