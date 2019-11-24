@@ -1,6 +1,6 @@
 package br.com.achimid.noverde.core.policy.impl;
 
-import br.com.achimid.noverde.core.integration.ApiScore;
+import br.com.achimid.noverde.core.integration.ApiNoverde;
 import br.com.achimid.noverde.core.policy.PolicyFacade;
 import br.com.achimid.noverde.loan.Loan;
 import br.com.achimid.noverde.loan.types.RefusedPolicyEnum;
@@ -21,14 +21,16 @@ public class ScorePolicy implements PolicyFacade {
     private int scoreLimit;
 
     @Autowired
-    private ApiScore apiScore;
+    private ApiNoverde apiNoverde;
 
 
     @Override
     public void validatePolicy(@NotNull Loan loan) {
         log.info("Validando politica de Score");
 
-        int scoreConsulted = apiScore.consultScoreByCPF(loan.getCpf());
+        int scoreConsulted = apiNoverde.consultScoreByCPF(loan.getCpf());
+        loan.setScore(scoreConsulted);
+
         if (scoreLimit < scoreConsulted) return;
 
         loan.refuse(RefusedPolicyEnum.SCORE);

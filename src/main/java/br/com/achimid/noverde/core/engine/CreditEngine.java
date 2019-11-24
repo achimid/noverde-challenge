@@ -2,6 +2,7 @@ package br.com.achimid.noverde.core.engine;
 
 import br.com.achimid.noverde.core.policy.PolicyFacade;
 import br.com.achimid.noverde.core.policy.PolicyFactory;
+import br.com.achimid.noverde.core.util.MathUtils;
 import br.com.achimid.noverde.loan.Loan;
 import br.com.achimid.noverde.loan.LoanRepository;
 import br.com.achimid.noverde.loan.types.LoanStatusEnum;
@@ -22,6 +23,9 @@ public class CreditEngine {
 
     @Autowired
     private PolicyFactory policyFactory;
+
+    @Autowired
+    private MathUtils mathUtils;
 
 
     /**
@@ -55,6 +59,7 @@ public class CreditEngine {
         if (loan.isRefused()) return;
 
         loan.approve();
+        mathUtils.calcularValorParcela(loan);
         loanRepository.save(loan);
     }
 

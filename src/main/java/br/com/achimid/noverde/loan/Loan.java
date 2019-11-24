@@ -52,7 +52,9 @@ public class Loan {
     @OneToOne(cascade = CascadeType.ALL)
     private LoanProcess process;
 
+    private Double commitment;
 
+    private Integer score;
 
 
     public boolean isCompleted() {
@@ -73,6 +75,13 @@ public class Loan {
         val lcDate = DateUtils.getInstance().convertToLocalDateTime(this.birthdate);
         return Period.between(lcDate.toLocalDate(), LocalDate.now()).getYears();
     }
+
+    public BigDecimal getValorSalarioNaoComprometido() {
+        val valorSalarioComprometido = this.income.multiply(new BigDecimal(this.commitment));
+        val valorSalarioNaoComprometido = this.income.subtract(valorSalarioComprometido);
+        return valorSalarioNaoComprometido;
+    }
+
 
     public void refuse(RefusedPolicyEnum rfPolicy) {
         this.status = LoanStatusEnum.COMPLETED;

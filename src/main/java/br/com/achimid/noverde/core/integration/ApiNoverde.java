@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class ApiScore {
+public class ApiNoverde {
 
     @Autowired
     private RestTemplate restTemplate;
