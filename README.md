@@ -13,6 +13,12 @@ Entre na raiz do projeto e execute os comandos a seguir:
 
 #### Considerações
 
+Para o propoósito de arquitetura, a aplicação esta seperada em 2 pacotes (noverde.api e noverde.core), com o objetivo de separar o que é funcionalidade da API e o processamento dos emprestimos. Fazendo desta maneira, é possivel separar as aplicações visando escalabilidade.
+
+Para o propoósito desse exercicio, utilizei um banco de dados em memória (H2), para facilitar o deploy da aplicação no Heroku.
+
+Todas as configurações estão no arquivo application.properties, e podem ser sobrescrita por veriaveis de ambiente.
+
 
 #### Sugestão de melhorias
 - Utilizar um banco de dados não relacional para ter uma malhor performace
@@ -22,5 +28,9 @@ Entre na raiz do projeto e execute os comandos a seguir:
 - Melhorar o sistema de cache utilizado
 
 - Implementar mais cenários de teste
+    - Teste de Integração
+    - Utilizar o Mockito nas requisições externas
+    - Cobrir fluxos de teste
+    - Aumentar coverage
 
 - Efetuar a separação entre API e Processamento em dois projetos para uma melhora de escalabilidade. 
