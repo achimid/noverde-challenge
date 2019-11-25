@@ -16,7 +16,12 @@ public enum LoanTermsEnum {
     public String getValor(){
         return this.valor;
     }
+
     public BigDecimal getValorBg(){
         return new BigDecimal(this.valor);
+    }
+
+    public Integer getValorI(){
+        return Integer.parseInt(this.valor);
     }
 }
