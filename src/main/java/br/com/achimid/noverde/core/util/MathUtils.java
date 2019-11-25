@@ -8,11 +8,16 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 
 @Component
 public class MathUtils {
 
     public BigDecimal calcularValorParcela(@NotNull Loan loan) {
+        return this.calcularValorParcela(loan, loan.getTerms().getValorI());
+    }
+
+    private BigDecimal calcularValorParcela(@NotNull Loan loan, Integer parcela) {
 
         Integer score = loan.getScore();
         Integer parcelasSolicitadas = loan.getTerms().getValorI();
@@ -20,6 +25,24 @@ public class MathUtils {
 
         BigDecimal juros = this.calculaTaxaDeJuros(score, parcelasSolicitadas);
         BigDecimal vParcelaCalculada = this.calculaFormulaParcela(vEmprestimo, juros, parcelasSolicitadas);
+
+        // Incremento de parcelas caso a parcela seja mais cara do que pode ser pago
+        if (vParcelaCalculada.compareTo(loan.getValorSalarioNaoComprometido()) > 0) {
+            val parcelasValidas = Arrays.asList(LoanTermsEnum.values());
+            val index = parcelasValidas.indexOf(LoanTermsEnum.valueOf("X" + parcela));
+
+            // Condição de parada
+            if (index >= parcelasValidas.size() - 1) return vParcelaCalculada;
+
+            // Recursão
+            return this.calcularValorParcela(loan, parcelasValidas.get(index + 1).getValorI());
+        }
+
+        if (loan.isApproved()) {
+            val process = loan.getProcess();
+            process.setAmount(vParcelaCalculada);
+            process.setTerms(parcela);
+        }
 
         return vParcelaCalculada;
     }
@@ -61,7 +84,7 @@ public class MathUtils {
                 } else if (score >= 700) {
                     return new BigDecimal("5.5").divide(BigDecimal.valueOf(100));
                 } else if (score >= 600) {
-                    return new BigDecimal("6.4");
+                    return new BigDecimal("6.4").divide(BigDecimal.valueOf(100));
                 }
                 break;
             case 9:
