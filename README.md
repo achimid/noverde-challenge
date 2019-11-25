@@ -34,3 +34,5 @@ Todas as configurações estão no arquivo application.properties, e podem ser s
     - Aumentar coverage
 
 - Efetuar a separação entre API e Processamento em dois projetos para uma melhora de escalabilidade. 
+
+- Trabalhar com conainner (Docker)
